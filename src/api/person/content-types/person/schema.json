@@ -33,8 +33,15 @@
     },
     "group_id": {
       "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::group.group",
+      "mappedBy": "person_id"
+    },
+    "user": {
+      "type": "relation",
       "relation": "oneToOne",
-      "target": "api::group.group"
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "person"
     }
   }
 }

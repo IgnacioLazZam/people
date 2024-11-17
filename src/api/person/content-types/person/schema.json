@@ -40,8 +40,16 @@
     "user": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "person"
+      "target": "plugin::users-permissions.user"
+    },
+    "goals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::goal.goal",
+      "mappedBy": "person"
+    },
+    "username": {
+      "type": "string"
     }
   }
 }

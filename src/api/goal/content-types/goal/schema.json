@@ -24,7 +24,7 @@
     "end_date": {
       "type": "date"
     },
-    "fullfilled": {
+    "fulfilled": {
       "type": "boolean"
     },
     "person": {

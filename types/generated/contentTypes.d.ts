@@ -362,6 +362,166 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiGoalGoal extends Schema.CollectionType {
+  collectionName: 'goals';
+  info: {
+    singularName: 'goal';
+    pluralName: 'goals';
+    displayName: 'Goal';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.String;
+    start_date: Attribute.Date;
+    end_date: Attribute.Date;
+    fullfilled: Attribute.Boolean;
+    person: Attribute.Relation<
+      'api::goal.goal',
+      'manyToOne',
+      'api::person.person'
+    >;
+    habits: Attribute.Relation<
+      'api::goal.goal',
+      'oneToMany',
+      'api::habit.habit'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::goal.goal', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::goal.goal', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiGroupGroup extends Schema.CollectionType {
+  collectionName: 'groups';
+  info: {
+    singularName: 'group';
+    pluralName: 'groups';
+    displayName: 'group';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    person_id: Attribute.Relation<
+      'api::group.group',
+      'manyToOne',
+      'api::person.person'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHabitHabit extends Schema.CollectionType {
+  collectionName: 'habits';
+  info: {
+    singularName: 'habit';
+    pluralName: 'habits';
+    displayName: 'Habit';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.String;
+    frecuency: Attribute.Enumeration<['daily', 'weekly', 'monthly']>;
+    duration: Attribute.Integer;
+    done: Attribute.Boolean;
+    goal: Attribute.Relation<'api::habit.habit', 'manyToOne', 'api::goal.goal'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::habit.habit',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::habit.habit',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPersonPerson extends Schema.CollectionType {
+  collectionName: 'people';
+  info: {
+    singularName: 'person';
+    pluralName: 'people';
+    displayName: 'People';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    surname: Attribute.String;
+    email: Attribute.Email;
+    gender: Attribute.Enumeration<['male', 'female']>;
+    age: Attribute.Date;
+    group_id: Attribute.Relation<
+      'api::person.person',
+      'oneToMany',
+      'api::group.group'
+    >;
+    user: Attribute.Relation<
+      'api::person.person',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    goals: Attribute.Relation<
+      'api::person.person',
+      'oneToMany',
+      'api::goal.goal'
+    >;
+    username: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::person.person',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::person.person',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -677,166 +837,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiGoalGoal extends Schema.CollectionType {
-  collectionName: 'goals';
-  info: {
-    singularName: 'goal';
-    pluralName: 'goals';
-    displayName: 'Goal';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    description: Attribute.String;
-    start_date: Attribute.Date;
-    end_date: Attribute.Date;
-    fullfilled: Attribute.Boolean;
-    person: Attribute.Relation<
-      'api::goal.goal',
-      'manyToOne',
-      'api::person.person'
-    >;
-    habits: Attribute.Relation<
-      'api::goal.goal',
-      'oneToMany',
-      'api::habit.habit'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::goal.goal', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::goal.goal', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiGroupGroup extends Schema.CollectionType {
-  collectionName: 'groups';
-  info: {
-    singularName: 'group';
-    pluralName: 'groups';
-    displayName: 'group';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    person_id: Attribute.Relation<
-      'api::group.group',
-      'manyToOne',
-      'api::person.person'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::group.group',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::group.group',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiHabitHabit extends Schema.CollectionType {
-  collectionName: 'habits';
-  info: {
-    singularName: 'habit';
-    pluralName: 'habits';
-    displayName: 'Habit';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    description: Attribute.String;
-    frecuency: Attribute.Enumeration<['daily', 'weekly', 'monthly']>;
-    duration: Attribute.Integer;
-    done: Attribute.Boolean;
-    goal: Attribute.Relation<'api::habit.habit', 'manyToOne', 'api::goal.goal'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::habit.habit',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::habit.habit',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPersonPerson extends Schema.CollectionType {
-  collectionName: 'people';
-  info: {
-    singularName: 'person';
-    pluralName: 'people';
-    displayName: 'People';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    surname: Attribute.String;
-    email: Attribute.Email;
-    gender: Attribute.Enumeration<['male', 'female']>;
-    age: Attribute.Date;
-    group_id: Attribute.Relation<
-      'api::person.person',
-      'oneToMany',
-      'api::group.group'
-    >;
-    user: Attribute.Relation<
-      'api::person.person',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    goals: Attribute.Relation<
-      'api::person.person',
-      'oneToMany',
-      'api::goal.goal'
-    >;
-    username: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::person.person',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::person.person',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -847,16 +847,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::goal.goal': ApiGoalGoal;
+      'api::group.group': ApiGroupGroup;
+      'api::habit.habit': ApiHabitHabit;
+      'api::person.person': ApiPersonPerson;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::goal.goal': ApiGoalGoal;
-      'api::group.group': ApiGroupGroup;
-      'api::habit.habit': ApiHabitHabit;
-      'api::person.person': ApiPersonPerson;
     }
   }
 }

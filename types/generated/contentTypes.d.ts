@@ -786,6 +786,42 @@ export interface ApiHabitHabit extends Schema.CollectionType {
   };
 }
 
+export interface ApiHabitProgressHabitProgress extends Schema.CollectionType {
+  collectionName: 'habit_progresses';
+  info: {
+    singularName: 'habit-progress';
+    pluralName: 'habit-progresses';
+    displayName: 'HabitProgress';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    habit: Attribute.Relation<
+      'api::habit-progress.habit-progress',
+      'oneToOne',
+      'api::habit.habit'
+    >;
+    date: Attribute.Date;
+    isCompleted: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::habit-progress.habit-progress',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::habit-progress.habit-progress',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPersonPerson extends Schema.CollectionType {
   collectionName: 'people';
   info: {
@@ -856,6 +892,7 @@ declare module '@strapi/types' {
       'api::goal.goal': ApiGoalGoal;
       'api::group.group': ApiGroupGroup;
       'api::habit.habit': ApiHabitHabit;
+      'api::habit-progress.habit-progress': ApiHabitProgressHabitProgress;
       'api::person.person': ApiPersonPerson;
     }
   }

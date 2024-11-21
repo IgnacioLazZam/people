@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "habit_progresses",
+  "info": {
+    "singularName": "habit-progress",
+    "pluralName": "habit-progresses",
+    "displayName": "HabitProgress"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "habit": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::habit.habit"
+    },
+    "date": {
+      "type": "date"
+    },
+    "isCompleted": {
+      "type": "boolean"
+    }
+  }
+}

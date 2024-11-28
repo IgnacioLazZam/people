@@ -855,6 +855,7 @@ export interface ApiPersonPerson extends Schema.CollectionType {
       'api::goal.goal'
     >;
     username: Attribute.String;
+    picture: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
